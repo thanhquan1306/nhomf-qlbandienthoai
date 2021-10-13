@@ -4,16 +4,16 @@ require_once './config/database.php';
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
-
-
 $productModel = new ProductModel();
+$categoryModel = new CategoryModel();
 $product = null;
 $_id =  null;
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $product = $productModel->findProductById($_id);
+    $product = $productModel->getProductById($_id);
 }
-$categories = $productModel->getCategories();
+var_dump($product);
+$categories = $categoryModel->getCategories();
 $selected = "";
 ?>
 <!DOCTYPE html>
@@ -38,9 +38,9 @@ $selected = "";
                 <label class="control-label">Choose an image :</label>
                 <div class="controls">
                     <img width="100" height="100"
-                        src="./public/images/<?= $product[0]['product_photo']?>"
+                        src="./public/images/<?= $product['product_photo']?>"
                         alt="">
-                    <p><?= $product[0]['product_photo']?>
+                    <p><?= $product['product_photo']?>
                     </p>
                     <input type="file" name="fileUpload" id="fileUpload">
                 </div>
@@ -48,13 +48,13 @@ $selected = "";
             <div class="form-group">
                 <label for="name">Name</label>
                 <input class="form-control" name="name" placeholder="Name"
-                    value="<?= $product[0]['product_name']?>">
+                    value="<?= $product['product_name']?>">
             </div>
             <div class="form-group">
                 <label for="categories">Categories</label>
                 <select class="form-control" name="cate">
                     <?php foreach ($categories as $cate) {
-    if ($product[0]['id'] == $cate['product_id']) {
+    if ($product['id'] == $cate['product_id']) {
         $selected = "selected"; ?>
                     <option
                         value="<?php echo $cate['category_id']?>"
@@ -71,13 +71,13 @@ $selected = "";
                 <label for="description">Description</label>
                 <div class="controls">
                     <textarea class="span11"  cols="70" rows="10"
-                        placeholder="Description" name="description"><?= $product[0]['product_description']?></textarea>
+                        placeholder="Description" name="description"><?= $product['product_description']?></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
                 <input type="price" name="price" class="form-control" placeholder="price"
-                    value="<?= $product[0]['product_price']?>">
+                    value="<?= $product['product_price']?>">
             </div>
             <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
         </form>

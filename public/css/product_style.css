@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar .collapse ul .nav-item {
+    transition: all 0.5s;
+}
+
+.navbar .collapse ul .nav-item:hover {
+    background-color: tomato;
+}
+
+.table {
+    text-align: center;
+}
+
+.wrapper_option {
+    display: flex;
+}
+
+.wrapper_option .del {
+    margin: 0 20px;
+}
+
+a {
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.wrapper_option .del a {
+    background-color: red;
+    border: none;
+    color: white;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.wrapper_option .del a:hover {
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    color: red;
+}
+
+.wrapper_option .edit a {
+    background-color: lime;
+    border: none;
+    color: white;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.wrapper_option .edit a:hover {
+    background-color: white;
+    border: none;
+    color: lime;
+    text-decoration: none;
+}
+
+a {
+    width: 50px;
+}
