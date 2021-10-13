@@ -5,6 +5,7 @@ spl_autoload_register(function ($class_name) {
 });
 
 $product = new ProductModel();
+$categoryModel = new CategoryModel();
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
@@ -23,7 +24,7 @@ if (isset($_POST['id'])) {
         $pro_image=null;
     }
     $description=$_POST['description'];
-    $product->updateCategory($cate,$id);
+    $categoryModel->updateCategory($cate,$id);
     $product->updateProduct($name,$price,$description,$pro_image,$id);
     header("location: product_list.php");
     
