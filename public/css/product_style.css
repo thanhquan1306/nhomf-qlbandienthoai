@@ -30,7 +30,7 @@ a {
     color: white;
 }
 
-.wrapper_option .del a {
+.wrapper_option .del button {
     background-color: red;
     border: none;
     color: white;
@@ -38,19 +38,24 @@ a {
     transition: all 0.5s;
 }
 
-.wrapper_option .del a:hover {
+.wrapper_option .del button:hover {
     background-color: white;
     border: none;
     text-decoration: none;
     color: red;
 }
-
+.wrapper_option .edit {
+    margin-top: 6px;
+}
 .wrapper_option .edit a {
     background-color: lime;
-    border: none;
+    /* border: 1px; */
+    border-radius: 5px;
     color: white;
     text-decoration: none;
     transition: all 0.5s;
+    padding: 7px 29px;
+    margin-top: 8px;
 }
 
 .wrapper_option .edit a:hover {
