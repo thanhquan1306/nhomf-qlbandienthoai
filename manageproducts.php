@@ -58,7 +58,7 @@ $productList = $productModel->getProducts();
             </thead>
             <?php
             foreach ($productList as $item) {
-            ?>
+                ?>
             <tr>
                 <td><?php echo $item['id'] ?></td>
                 
