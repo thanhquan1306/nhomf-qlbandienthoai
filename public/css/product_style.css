@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar .collapse ul .nav-item {
+    transition: all 0.5s;
+}
+
+.navbar .collapse ul .nav-item:hover {
+    background-color: tomato;
+}
+
+.table {
+    text-align: center;
+}
+
+.wrapper_option {
+    display: flex;
+}
+
+.wrapper_option .del {
+    margin: 0 20px;
+}
+
+a {
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.wrapper_option .del button {
+    background-color: red;
+    border: none;
+    color: white;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.wrapper_option .del button:hover {
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    color: red;
+}
+.wrapper_option .edit {
+    margin-top: 6px;
+}
+.wrapper_option .edit a {
+    background-color: lime;
+    /* border: 1px; */
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.5s;
+    padding: 7px 29px;
+    margin-top: 8px;
+}
+
+.wrapper_option .edit a:hover {
+    background-color: white;
+    border: none;
+    color: lime;
+    text-decoration: none;
+}
+
+a {
+    width: 50px;
+}
