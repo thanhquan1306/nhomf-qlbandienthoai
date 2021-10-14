@@ -1,5 +1,9 @@
 <?php
+session_start();
 require_once './config/database.php';
+require_once './config/config.php';
+require_once("./login/config.php");
+require_once("./login/auth.php");
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
