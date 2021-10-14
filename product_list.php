@@ -1,8 +1,9 @@
 <?php
 session_start();
-
 require_once './config/database.php';
 require_once './config/config.php';
+require_once("./login/config.php");
+require_once("./login/auth.php");
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
@@ -12,8 +13,20 @@ $params = array();
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
+
+$notification = '';
+
+if (isset($_POST['deleteProduct'])) {
+    $id = $_POST['id'];
+    if($productModel->deleteProduct($id)) {
+        $notification = 'Deleted successfully';
+    }
+}
+
 $products = $productModel->getProducts($params);
 $no = 1;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,9 +81,14 @@ $no = 1;
                                 <div class="view"><a
                                         href="view_product.php?id=<?php echo $item['product_id'] ?>">View</a>
                                 </div>
-                                <div class="del"><a
-                                        href="del_product.php?id=<?php echo $item['product_id'] ?>">Xoá</a>
+                                <div class="del">
+
+                                <form action="product_list.php" method="post" onsubmit="return confirm('Bạn chắc chắn xóa?')">
+                        <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                        <button type="submit" name="deleteProduct" class="btn btn-danger">Xóa</button>
+                    </form>                
                                 </div>
+                              
                                 <div class="edit"><a
                                         href="form_edit_product.php?id=<?php echo $item['product_id'] ?>">Sửa</a>
                                 </div>
