@@ -1,5 +1,9 @@
 <?php
+session_start();
 require_once './config/database.php';
+require_once './config/config.php';
+require_once("./login/config.php");
+require_once("./login/auth.php");
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
@@ -56,16 +60,12 @@ $productList = $productModel->getProducts();
                 <td>Update</td>
                 <td>Delete</td>
             </thead>
-            <?php
-            foreach ($productList as $item) {
-            ?>
+            <?php foreach ($productList as $item) { ?>
             <tr>
                 <td><?php echo $item['id'] ?></td>
-                <?php
-                    $mainPhoto = explode(',', $item['product_photo']);
-                ?>
+                
 
-                <td><img src="./public/images/<?php echo $mainPhoto[0] ?>" class="img-fluid" alt="..."></td>
+                <td><img src="./public/images/<?php echo $item['product_photo'] ?>" class="img-fluid" alt="..."></td>
                 <td><?php echo $item['product_name'] ?></td>
                 <td><a href="updateproduct.php?id=<?php echo $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
                 <td>
@@ -75,9 +75,7 @@ $productList = $productModel->getProducts();
                     </form>                
                 </td>
             </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </table>
     </div>
 </body>
