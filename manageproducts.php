@@ -1,9 +1,5 @@
 <?php
-session_start();
 require_once './config/database.php';
-require_once './config/config.php';
-require_once("./login/config.php");
-require_once("./login/auth.php");
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
@@ -19,6 +15,7 @@ if (isset($_POST['deleteProduct'])) {
 }
 
 $productList = $productModel->getProducts();
+$no = 1;
 ?>
 
 <!DOCTYPE html>
@@ -64,14 +61,11 @@ $productList = $productModel->getProducts();
             foreach ($productList as $item) {
             ?>
             <tr>
-                <td><?php echo $item['id'] ?></td>
-                <?php
-                    $mainPhoto = explode(',', $item['product_photo']);
-                ?>
+                <td><?php echo "SP". $no++ . "2020" ?></td>
 
-                <td><img src="./public/images/<?php echo $mainPhoto[0] ?>" class="img-fluid" alt="..."></td>
+                <td><img src="./public/images/<?php echo $item['product_photo'] ?>" class="img-fluid" alt="..."></td>
                 <td><?php echo $item['product_name'] ?></td>
-                <td><a href="updateproduct.php?id=<?php echo $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
+                <td><a href="form_edit_product.php?id=<?= $item['product_id'] ?>" class="btn btn-primary">UPDATE</a></td>
                 <td>
                     <form action="manageproducts.php" method="post" onsubmit="return confirm('Xoa khong?')">
                         <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
