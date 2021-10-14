@@ -178,6 +178,7 @@ $categoryList = $categoryModel->getCategories();
                         <?php
                         }
                         ?>
+                        <p><a href="./login/logout.php">Logout</a></p>
                     </ul>
                 </div>
                 <div class="col-md-9">
