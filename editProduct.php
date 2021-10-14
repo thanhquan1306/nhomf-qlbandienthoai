@@ -12,7 +12,7 @@ if (isset($_POST['id'])) {
     $name = $_POST['name'];
     $cate = $_POST['cate'];
     $price = $_POST['price'];
-    var_dump($_POST);
+    // var_dump($_POST);
     if (isset($_FILES['fileUpload'])) {
         $pro_image=$_FILES['fileUpload']['name'];
           //upload hinh
@@ -26,6 +26,6 @@ if (isset($_POST['id'])) {
     $description=$_POST['description'];
     $categoryModel->updateCategory($cate,$id);
     $product->updateProduct($name,$price,$description,$pro_image,$id);
-    header("location: product_list.php");
+    header("location: manageproducts.php");
     
 }
