@@ -5,9 +5,7 @@ class ProductModel extends Db
     public function getProducts()
     {
         //2. Viết câu SQL
-        $sql = parent::$connection->prepare("SELECT * FROM `products`, `categories`, `products_categories` WHERE 
-        `products`.`id` = `products_categories`.`product_id` 
-        AND `categories`.`id` = `products_categories`.`category_id`");
+        $sql = parent::$connection->prepare("SELECT * FROM products");
         return parent::select($sql);
     }
 
