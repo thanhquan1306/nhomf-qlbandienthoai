@@ -12,7 +12,7 @@ if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $product = $productModel->getProductById($_id);
 }
-var_dump($product);
+// var_dump($product);
 $categories = $categoryModel->getCategories();
 $selected = "";
 ?>
@@ -29,7 +29,6 @@ $selected = "";
 </head>
 
 <body>
-    <?php  include 'views/header.php';?>
     <div class="container">
         <?php if ($product || !isset($_id)) {?>
         <form action="editProduct.php" method="post" enctype="multipart/form-data">
