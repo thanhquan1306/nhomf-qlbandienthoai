@@ -56,9 +56,7 @@ $productList = $productModel->getProducts();
                 <td>Update</td>
                 <td>Delete</td>
             </thead>
-            <?php
-            foreach ($productList as $item) {
-            ?>
+            <?php foreach ($productList as $item) { ?>
             <tr>
                 <td><?php echo $item['id'] ?></td>
                 
@@ -73,9 +71,7 @@ $productList = $productModel->getProducts();
                     </form>                
                 </td>
             </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </table>
     </div>
 </body>
