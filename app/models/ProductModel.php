@@ -5,9 +5,7 @@ class ProductModel extends Db
     public function getProducts()
     {
         //2. Viết câu SQL
-        $sql = parent::$connection->prepare("SELECT * FROM `products`, `categories`, `products_categories` WHERE 
-        `products`.`id` = `products_categories`.`product_id` 
-        AND `categories`.`id` = `products_categories`.`category_id`");
+        $sql = parent::$connection->prepare("SELECT * FROM `products`");
         return parent::select($sql);
     }
 
@@ -59,7 +57,7 @@ class ProductModel extends Db
     // Thêm sản phẩm
     public function createProduct($productName, $productDescription, $productPrice, $productPhoto)
     {
-        $sql = parent::$connection->prepare("INSERT INTO `products` (`product_name`, `product_description`, `product_price`, `product_photo`) VALUES (?, ?, ?, ?);");
+        $sql = parent::$connection->prepare("INSERT INTO `products` (`id`, `product_name`, `product_description`, `product_price`, `product_photo`, `product_view`) VALUES (NULL, ?, ?, ?, ?, 0);");
         $sql->bind_param('ssis', $productName, $productDescription, $productPrice, $productPhoto);
         return $sql->execute();
     }
