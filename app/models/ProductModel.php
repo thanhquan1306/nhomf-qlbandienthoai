@@ -5,7 +5,9 @@ class ProductModel extends Db
     public function getProducts()
     {
         //2. Viết câu SQL
-        $sql = parent::$connection->prepare("SELECT * FROM products");
+        $sql = parent::$connection->prepare("SELECT * FROM `products`, `categories`, `products_categories` WHERE 
+        `products`.`id` = `products_categories`.`product_id` 
+        AND `categories`.`id` = `products_categories`.`category_id`");
         return parent::select($sql);
     }
 
@@ -63,11 +65,19 @@ class ProductModel extends Db
     }
     
     // Cập nhật sản phẩm
-    public function updateProduct($productName, $productDescription, $productPrice, $productPhoto, $id)
-    {
-        $sql = parent::$connection->prepare("UPDATE `products` SET `product_name` = ?, `product_description` = ?, `product_price` = ?, `product_photo` = ? WHERE `products`.`id` = ?;");
-        $sql->bind_param('ssisi', $productName, $productDescription, $productPrice, $productPhoto, $id);
-        return $sql->execute();
+    public function updateProduct($name,$price,$description,$pro_image,$id) {
+
+        $name = mysqli_real_escape_string(parent::$connection, $name);
+        $description = mysqli_real_escape_string(parent::$connection, $description);
+        $price = mysqli_real_escape_string(parent::$connection, $price);
+        if ($pro_image == null) {
+            $sql = parent::$connection->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=? WHERE `id` = ?");    
+            $sql->bind_param("ssii", $name, $description, $price,$id);
+        }else{
+            $sql = parent::$connection->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=?,`product_photo`=? WHERE `id` = ?");
+            $sql->bind_param("ssisi", $name, $description, $price , $pro_image,$id);
+        }
+         return $sql->execute();
     }
 
     // Xóa sản phẩm
