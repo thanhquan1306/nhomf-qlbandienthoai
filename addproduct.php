@@ -11,8 +11,8 @@ $productPrice=$_POST['productPrice'];
 $productPhoto=$_FILES['productPhoto']['name'];
 
 $productModel->createProduct($productName, $productDescription, $productPrice, $productPhoto);
-
-header("location: manageproducts.php"); 
+var_dump($productModel);
+// header("location: manageproducts.php");
 
 $target_dir = "./public/images/";
 $target_file = $target_dir . basename($_FILES["productPhoto"]["name"]);

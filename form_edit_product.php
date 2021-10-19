@@ -49,7 +49,7 @@ $selected = "";
                 <input class="form-control" name="name" placeholder="Name"
                     value="<?= $product['product_name']?>">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="categories">Categories</label>
                 <select class="form-control" name="cate">
                     <?php foreach ($categories as $cate) {
@@ -65,7 +65,7 @@ $selected = "";
                         <?php echo $cate['category_name']?>
                         <?php } } ?>
                 </select>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="description">Description</label>
                 <div class="controls">
