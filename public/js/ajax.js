@@ -1,4 +1,4 @@
-//Hiện thông tin sản phẩm
+//Hiện thị thông tin sản phẩm
 async function getProduct(productID) {
     //B1:
     const data = { id: productID };
