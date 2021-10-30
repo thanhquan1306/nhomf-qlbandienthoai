@@ -6,15 +6,8 @@ spl_autoload_register(function ($class_name) {
 
 $productModel = new ProductModel();
 
-$totalRow = $productModel->getTotalRow();
-$perPage = 3;
-$page = 1;
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-}
 //$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$productList = $productModel->getProductsByPage($perPage, $page);
 $getProduct = $productModel->getProducts();
 
 $categoryModel = new CategoryModel();
@@ -28,7 +21,7 @@ $categoryList = $categoryModel->getCategories();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop Moblile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <style>
@@ -130,14 +123,14 @@ $categoryList = $categoryModel->getCategories();
 
 <body>
     <nav class="navbar navbar-expand-sm ">
-        <a class="navbar-brand" href="#"><img src="./public/images/smartphone (1).png" alt=""></a>
+        <a class="navbar-brand" href="./index.php"><img src="./public/images/smartphone (1).png" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 has">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="./index.php">Home</a>
                 </li>
 
                 <?php
@@ -221,7 +214,6 @@ $categoryList = $categoryModel->getCategories();
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
