@@ -1,7 +1,6 @@
 <?php
 class CategoryModel extends Db
 {
-    // Lấy sản phẩm theo theo id và id hãng
     public function getCategories()
     {
         //2. Viết câu SQL
