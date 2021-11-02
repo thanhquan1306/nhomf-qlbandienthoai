@@ -191,7 +191,7 @@ $categoryList = $categoryModel->getCategories();
                             <li>
                                 <label>
                                     <?php echo $i['category_name']; ?>
-                                    <input type="checkbox" name="checkboxcate">
+                                    <input type="checkbox" name="checkboxcate" class="checkboxCategory" id="<?= $i['id'] ?>" onchange="getProductByCategorie()">
                                 </label>
                             </li>
                         <?php
