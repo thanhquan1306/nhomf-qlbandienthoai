@@ -122,6 +122,7 @@ $categoryList = $categoryModel->getCategories();
 </style>
 
 <body>
+    <!-- Phân loại sản phẩm theo hãng-header -->
     <nav class="navbar navbar-expand-sm ">
         <a class="navbar-brand" href="./index.php"><img src="./public/images/smartphone (1).png" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
