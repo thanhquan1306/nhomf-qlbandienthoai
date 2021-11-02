@@ -1,4 +1,9 @@
 <?php
+
+use function PHPSTORM_META\type;
+
+require_once 'Db.php';
+
 class CategoryModel extends Db
 {
     // Lấy sản phẩm theo theo id và id hãng

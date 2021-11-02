@@ -88,9 +88,26 @@ $categoryList = $categoryModel->getCategories();
         top: 0;
         left: -30px;
     }
-    .con{
+
+    .con {
         position: relative;
         top: 30px;
+    }
+
+    .card .imge {
+        width: 210px;
+        position: relative;
+        top: calc(50% - 105px);
+        left: calc(50% - 105px);
+    }
+
+    .card .card-body {
+        background-color: #F08E21;
+    }
+
+    .card .khung {
+        height: 294px;
+        border: 2px solid #F08E21;
     }
 </style>
 
@@ -130,17 +147,20 @@ $categoryList = $categoryModel->getCategories();
                 <?php
                 foreach ($productList as $item) {
                 ?>
-                    <div class="col-md-3">
+                    <div class="col-md-3 pro">
                         <div class="card">
                             <?php
                             $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
                             ?>
-                            <a href="product.php/<?php echo $productPath; ?>">
-                                <img src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
-                            </a>
+                            <div class="khung">
+                                <a href="product.php/<?php echo $productPath; ?>">
+                                    <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $item['product_name'] ?></h5>
-                                <p class="card-text"><?php echo $item['product_price'] ?></p>
+                                <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
+                                <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
                             </div>
                         </div>
                     </div>
