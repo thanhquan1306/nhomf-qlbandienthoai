@@ -82,7 +82,7 @@ $categoryList = $categoryModel->getCategories();
     .search {
         position: relative;
         top: 0;
-        left: -2.5%;
+        left: -12.5%;
         display: flex;
     }
 
@@ -126,6 +126,87 @@ $categoryList = $categoryModel->getCategories();
     .card .khung {
         height: 294px;
     }
+    /*Dropdown gh*/
+.dropbtn {
+    background-color: #F08E21;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right:90px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 10px 0px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+  }
+  
+  .dropdown-content a:hover {
+    color: #f05137;
+
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content h1{
+      color: red;
+      font-size: 15px;
+      padding-top: 11px;
+  }
+  .contentt h2{
+      font-size: 15px;
+      padding-top: 10px;
+      color: gray;
+  }
+
+ .dropdown-content::after{
+    position: absolute;
+    top: -7px;
+    right: 40px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+    content: '';
+    display: block;
+    z-index: 2;
+    transition: all 2000ms linear;
+ }
+.btn-xem button{
+    border: 0 solid #EE4D2D;
+    background-color:#EE4D2D ;
+    color: white;
+    text-align: right;
+    padding: 5px 10px;
+    margin: 10px 0px;
+}
+.btn-xem{
+    text-align: right;
+    max-width: 101%;
+    background-color: rgb(251, 249, 249);
+}
 </style>
 
 <body>
@@ -155,6 +236,43 @@ $categoryList = $categoryModel->getCategories();
                 <input class="form-control mr-sm-2 ip" type="text" placeholder="Search" name="q">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
+            <div class="dropdown" style="float:left;">
+                        <button class="dropbtn">
+                            <div class="shop">
+                                <a href="GioHang.html">
+                                    <svg width="42" height="34" viewBox="0 0 42 34" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" style="width:26px;height: 26px;">
+                                        <path
+                                            d="M33.6 27.2C34.7139 27.2 35.7822 27.5582 36.5698 28.1958C37.3575 28.8335 37.8 29.6983 37.8 30.6C37.8 31.5017 37.3575 32.3665 36.5698 33.0042C35.7822 33.6418 34.7139 34 33.6 34C32.4861 34 31.4178 33.6418 30.6302 33.0042C29.8425 32.3665 29.4 31.5017 29.4 30.6C29.4 28.713 31.269 27.2 33.6 27.2ZM0 0H6.867L8.841 3.4H39.9C40.457 3.4 40.9911 3.57911 41.3849 3.89792C41.7788 4.21673 42 4.64913 42 5.1C42 5.389 41.895 5.678 41.748 5.95L34.23 16.949C33.516 17.986 32.13 18.7 30.555 18.7H14.91L13.02 21.471L12.957 21.675C12.957 21.7877 13.0123 21.8958 13.1108 21.9755C13.2092 22.0552 13.3428 22.1 13.482 22.1H37.8V25.5H12.6C11.4861 25.5 10.4178 25.1418 9.63015 24.5042C8.8425 23.8665 8.4 23.0017 8.4 22.1C8.4 21.505 8.589 20.944 8.904 20.468L11.76 16.303L4.2 3.4H0V0ZM12.6 27.2C13.7139 27.2 14.7822 27.5582 15.5698 28.1958C16.3575 28.8335 16.8 29.6983 16.8 30.6C16.8 31.5017 16.3575 32.3665 15.5698 33.0042C14.7822 33.6418 13.7139 34 12.6 34C11.4861 34 10.4178 33.6418 9.63015 33.0042C8.8425 32.3665 8.4 31.5017 8.4 30.6C8.4 28.713 10.269 27.2 12.6 27.2ZM31.5 15.3L37.338 6.8H10.794L15.75 15.3H31.5Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </button>
+                        <div class="dropdown-content" style="left: -270px;top: 75px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="contentt">
+                                        <h2>Sản phẩm mới thêm</h2>
+                                    </div>
+                                    <div class="col-md-2">
+                                         <a href="thanhtoan.html"><img src="./images/11red.jpg" alt="" width="50px"></a>
+                                        </div>
+                                    <div class="col-md-7">
+                                        <a href="thanhtoan.html">Iphone 11 64GB màu đỏ</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <h1>8,990,000</h1>
+                                    </div>
+                                   
+                                    <div class="btn-xem">
+                                       <a  href=""><button>Xem Giỏ Hàng</button></a> 
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
         </div>
 
     </nav>
