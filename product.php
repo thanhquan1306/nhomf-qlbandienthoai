@@ -39,10 +39,11 @@ $item = $productModel->getProductById($id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop Moblile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
+    <!-- Hiển thị sản phẩm trang chi tiết sản phẩm -->
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -64,11 +65,11 @@ $item = $productModel->getProductById($id);
             </div>
             <div class="col-md-8">
                 <h1><?php echo $item['product_name'] ?></h1>
-                <p><?php echo $item['product_price'] ?></p>
+                <span><?php echo number_format($item['product_price'])?> vnđ</span>
                 <p>
                     <?php echo $item['product_description'] ?>
                 </p>
-                <p><?php echo $item['product_view'] ?></p>
+                <!-- <p><?php echo $item['product_view'] ?></p> -->
             </div>
         </div>
     </div>
