@@ -1,12 +1,10 @@
 <?php
 require_once './config/database.php';
-spl_autoload_register(function ($class_name) {
-    require './app/models/' . $class_name . '.php';
-});
+require_once './app/models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-$productModel = new ProductModel();
+$productModel = $factory->make('product');
 
-$totalRow = $productModel->getTotalRow();
 $perPage = 3;
 $page = 1;
 if (isset($_GET['page'])) {
@@ -14,10 +12,10 @@ if (isset($_GET['page'])) {
 }
 //$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$productList = $productModel->getProductsByPage($perPage, $page);
+$firstPageProduct = $productModel->getProductsByPage($perPage, $page);
 $getProduct = $productModel->getProducts();
 
-$categoryModel = new CategoryModel();
+$categoryModel = $factory->make('category');
 $categoryList = $categoryModel->getCategories();
 
 ?>
@@ -28,7 +26,7 @@ $categoryList = $categoryModel->getCategories();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop Moblile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <style>
@@ -43,13 +41,14 @@ $categoryList = $categoryModel->getCategories();
     .nav-link {
         color: white;
     }
-    nav .navbar-brand{
+
+    nav .navbar-brand {
         position: relative;
         top: 0;
         left: 31.5px;
     }
 
-    nav .has{
+    nav .has {
         width: calc(100% - 31.5px);
         position: relative;
         top: 0;
@@ -95,7 +94,7 @@ $categoryList = $categoryModel->getCategories();
         border: 1px solid #B6B1B1;
         color: #F08E21;
     }
-    
+
     .search button {
         border: 1px solid white;
         color: white;
@@ -121,10 +120,29 @@ $categoryList = $categoryModel->getCategories();
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background-color: #F08E21;
     }
 
     .card .khung {
         height: 294px;
+        border: 2px solid #F08E21;
+    }
+
+    .logout {
+        color: #F08E21;
+    }
+
+    .view-more {
+        text-align: center;
+    }
+
+    .view-more .loadProduct {
+        background-color: #F08E21;
+        border-radius: 5px;
+        border: 1px solid #F08E21;
+        height: 40px;
+        box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 60%);
+        margin-bottom: 30px;
     }
     /*Dropdown gh*/
 .dropbtn {
@@ -210,15 +228,16 @@ $categoryList = $categoryModel->getCategories();
 </style>
 
 <body>
+    <!-- Phân loại sản phẩm theo hãng-header -->
     <nav class="navbar navbar-expand-sm ">
-        <a class="navbar-brand" href="#"><img src="./public/images/smartphone (1).png" alt=""></a>
+        <a class="navbar-brand" href="./index.php"><img src="./public/images/smartphone (1).png" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 has">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="./index.php">Home</a>
                 </li>
 
                 <?php
@@ -290,19 +309,19 @@ $categoryList = $categoryModel->getCategories();
                             <li>
                                 <label>
                                     <?php echo $i['category_name']; ?>
-                                    <input type="checkbox" name="checkboxcate">
+                                    <input type="checkbox" name="checkboxcate" class="checkboxCategory" id="<?= $i['id'] ?>" onchange="getProductByCategorie()">
                                 </label>
                             </li>
                         <?php
                         }
                         ?>
-                        <p><a href="./login/logout.php">Logout</a></p>
+                        <p class="logout"><a href="./login/logout.php">Logout</a></p>
                     </ul>
                 </div>
                 <div class="col-md-9">
-                    <div class="row">
+                    <div class="row productList">
                         <?php
-                        foreach ($getProduct as $item) {
+                        foreach ($firstPageProduct as $item) {
                         ?>
                             <div class="col-md-4 pro">
                                 <div class="card">
@@ -317,7 +336,7 @@ $categoryList = $categoryModel->getCategories();
 
                                     <div class="card-body">
                                         <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
-                                        <h5 class="card-text"><?php echo number_format($item['product_price'])?> vnđ</h5>
+                                        <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
                                     </div>
                                 </div>
                             </div>
@@ -325,21 +344,22 @@ $categoryList = $categoryModel->getCategories();
                         }
                         ?>
                     </div>
-                    <!-- Chi tiết sản phẩm -->
+                    <div class="view-more">
+                        <button value="<?= ((count($getProduct)) / $perPage) ?>" type="button" class="loadProduct" id="index"  onclick="getMoreProduct()">Xem Thêm sản phẩm</button>
+                    </div>
+                    <!-- Chi tiết sản phẩm Trang chủ-->
                     <!-- Modal -->
                     <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="productName">Modal title</h5>
+                                    <h5 class="modal-title" id="productName"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" id="productDiscription">
-                                    ...
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
