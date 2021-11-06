@@ -69,7 +69,7 @@ async function getProductByCategorie() {
 
                 <div class="card-body">
                     <p class="card-title" onclick="getProduct(${result[i].id})">${result[i].product_name}</p>
-                    <h5 class="card-text">${result[i].product_price} vnđ</h5>
+                    <h5 class="card-text">${result[i].product_price.toLocaleString()} vnđ</h5>
                 </div>
             </div>
          </div>`;
