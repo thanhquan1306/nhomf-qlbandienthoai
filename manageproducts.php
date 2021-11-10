@@ -7,7 +7,7 @@ spl_autoload_register(function ($class_name) {
 
 $notification = '';
 $productModel = new ProductModel();
-
+// Quang Vinh
 if (isset($_POST['deleteProduct'])) {
     $id = $_POST['id'];
     if($productModel->deleteProduct($id)) {
@@ -58,6 +58,7 @@ $no = 1;
                 <td>Update</td>
                 <td>Delete</td>
             </thead>
+            <!-- DeleteProduct Quang Vinh -->
             <?php
             foreach ($productList as $item) {
             ?>
@@ -68,7 +69,7 @@ $no = 1;
                 <td><?php echo $item['product_name'] ?></td>
                 <td><a href="form_edit_product.php?id=<?= $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
                 <td>
-                    <form action="manageproducts.php" method="post" onsubmit="return confirm('Xoa khong?')">
+                    <form action="manageproducts.php" method="post" onsubmit="return confirm('Do you want to delete?')">
                         <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
                         <button type="submit" name="deleteProduct" class="btn btn-danger">DELETE</button>
                     </form>                
