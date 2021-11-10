@@ -78,7 +78,7 @@ class ProductModel extends Db
          return $sql->execute();
     }
 
-    // Xóa sản phẩm
+    // Xóa sản phẩm Quang Vinh
     public function deleteProduct($id)
     {
         $sql = parent::$connection->prepare("DELETE FROM `products` WHERE `products`.`id` = ?");
