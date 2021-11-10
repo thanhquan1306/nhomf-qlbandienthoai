@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once './config/database.php';
 require_once './app/models/FactoryPattern.php';
 $factory = new FactoryPattern();
@@ -18,6 +19,9 @@ $getProduct = $productModel->getProducts();
 $categoryModel = $factory->make('category');
 $categoryList = $categoryModel->getCategories();
 
+if (isset($_POST['add'])){
+    print_r($_POST['$id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +85,7 @@ $categoryList = $categoryModel->getCategories();
     .search {
         position: relative;
         top: 0;
-        left: -2.5%;
+        left: -12.5%;
         display: flex;
     }
 
@@ -116,7 +120,7 @@ $categoryList = $categoryModel->getCategories();
     }
 
     .card .card-body {
-        height: 100px;
+        height: 160px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -143,6 +147,10 @@ $categoryList = $categoryModel->getCategories();
         height: 40px;
         box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 60%);
         margin-bottom: 30px;
+    }
+    .dropbtn{
+        background-color:#F08E21;
+        margin-right:80px;
     }
 </style>
 
@@ -174,11 +182,23 @@ $categoryList = $categoryModel->getCategories();
                 <input class="form-control mr-sm-2 ip" type="text" placeholder="Search" name="q">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
+            <div class="dropdown" style="float:left;">
+                        <button class="dropbtn">
+                            <div class="shop">
+                                <a href="cart.php">
+                                    <svg width="42" height="34" viewBox="0 0 42 34" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" style="width:26px;height: 26px;">
+                                        <path
+                                            d="M33.6 27.2C34.7139 27.2 35.7822 27.5582 36.5698 28.1958C37.3575 28.8335 37.8 29.6983 37.8 30.6C37.8 31.5017 37.3575 32.3665 36.5698 33.0042C35.7822 33.6418 34.7139 34 33.6 34C32.4861 34 31.4178 33.6418 30.6302 33.0042C29.8425 32.3665 29.4 31.5017 29.4 30.6C29.4 28.713 31.269 27.2 33.6 27.2ZM0 0H6.867L8.841 3.4H39.9C40.457 3.4 40.9911 3.57911 41.3849 3.89792C41.7788 4.21673 42 4.64913 42 5.1C42 5.389 41.895 5.678 41.748 5.95L34.23 16.949C33.516 17.986 32.13 18.7 30.555 18.7H14.91L13.02 21.471L12.957 21.675C12.957 21.7877 13.0123 21.8958 13.1108 21.9755C13.2092 22.0552 13.3428 22.1 13.482 22.1H37.8V25.5H12.6C11.4861 25.5 10.4178 25.1418 9.63015 24.5042C8.8425 23.8665 8.4 23.0017 8.4 22.1C8.4 21.505 8.589 20.944 8.904 20.468L11.76 16.303L4.2 3.4H0V0ZM12.6 27.2C13.7139 27.2 14.7822 27.5582 15.5698 28.1958C16.3575 28.8335 16.8 29.6983 16.8 30.6C16.8 31.5017 16.3575 32.3665 15.5698 33.0042C14.7822 33.6418 13.7139 34 12.6 34C11.4861 34 10.4178 33.6418 9.63015 33.0042C8.8425 32.3665 8.4 31.5017 8.4 30.6C8.4 28.713 10.269 27.2 12.6 27.2ZM31.5 15.3L37.338 6.8H10.794L15.75 15.3H31.5Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </button>                     
+                    </div>
         </div>
-
     </nav>
-
-
     <div class="container">
         <div class="con">
             <div class="row">
@@ -201,6 +221,9 @@ $categoryList = $categoryModel->getCategories();
                     </ul>
                 </div>
                 <div class="col-md-9">
+                <?php if (isset($_SESSION['success'])) :?>
+                        <p class="text-danger"> <?= $_SESSION['success'] ?></p>
+                        <?php endif ; unset($_SESSION['success']) ?>
                     <div class="row productList">
                         <?php
                         foreach ($firstPageProduct as $item) {
@@ -219,6 +242,7 @@ $categoryList = $categoryModel->getCategories();
                                     <div class="card-body">
                                         <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
                                         <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
                                     </div>
                                 </div>
                             </div>

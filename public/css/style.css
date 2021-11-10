@@ -1,0 +1,122 @@
+nav {
+
+    background: #F08E21;
+    height: 80px;
+    font-size: 20px;
+}
+
+nav a,
+.nav-link {
+    color: white;
+}
+
+nav .navbar-brand {
+    position: relative;
+    top: 0;
+    left: 31.5px;
+}
+
+nav .has {
+    width: calc(100% - 31.5px);
+    position: relative;
+    top: 0;
+    left: 31.5px;
+}
+
+.con {
+    position: absolute;
+    top: 150px;
+    left: calc(50% - 600px);
+    width: 1200px;
+}
+
+.card {
+    height: 394px;
+    width: 280px;
+}
+
+.card .imge {
+    width: 210px;
+    position: relative;
+    top: calc(50% - 105px);
+    left: calc(50% - 105px);
+}
+
+.pro {
+    padding-bottom: 20px;
+}
+
+.search {
+    position: relative;
+    top: 0;
+    left: -12.5%;
+    display: flex;
+}
+
+.search .ip {
+    width: 400px;
+}
+
+.search button:hover {
+    background-color: #B6B1B1;
+    border: 1px solid #B6B1B1;
+    color: #F08E21;
+}
+
+.search button {
+    border: 1px solid white;
+    color: white;
+    border-radius: .25rem;
+}
+
+.search input {
+    margin-right: 5px;
+}
+
+.menu {
+    color: red;
+}
+
+.brands {
+    position: relative;
+    top: 0;
+    left: -30px;
+}
+
+.card .card-body {
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #F08E21;
+}
+
+.card .khung {
+    height: 294px;
+    border: 2px solid #F08E21;
+}
+
+.logout {
+    color: #F08E21;
+}
+
+.view-more {
+    text-align: center;
+}
+
+.view-more .loadProduct {
+    background-color: #F08E21;
+    border-radius: 5px;
+    border: 1px solid #F08E21;
+    height: 40px;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 60%);
+    margin-bottom: 30px;
+}
+.dropbtn{
+    background-color:#F08E21;
+    margin-right:80px;
+}
+
+
+
+ 

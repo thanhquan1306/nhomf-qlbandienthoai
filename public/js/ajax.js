@@ -1,3 +1,4 @@
+// session_destroy();
 //Trạng thái đầu tiên khi chưa nhấn nút "Thêm sản phẩm"
 let page = 1;
 
@@ -122,6 +123,7 @@ async function getMoreProduct() {
                     <div class="card-body">
                         <p class="card-title" onclick="getProduct(${item.id})">${item.product_name}</p>
                         <h5 class="card-text">${item.product_price.toLocaleString()} vnđ</h5>
+                        <a href="./addCart.php?id=${item.id}">Add to card</a>
                     </div>
                 </div>
             </div>`;
