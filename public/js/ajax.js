@@ -51,13 +51,16 @@ async function getProductByCategorie() {
         },
         body: JSON.stringify(data)
     });
+    if (page == 1) {
+        viewMoreBtn.style.visibility = 'hidden';
+    }
     //B2:
     //Hiển thị
     const result = await response.json();
     let productList = document.querySelector('.productList');
     productList.innerHTML = "";
 
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i <= result.length; i++) {
         productList.innerHTML += `
         <div class="col-md-4 pro">
             <div class="card">
