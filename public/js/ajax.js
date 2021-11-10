@@ -52,13 +52,16 @@ async function getProductByCategorie() {
         },
         body: JSON.stringify(data)
     });
+    if (page == 1) {
+        viewMoreBtn.style.visibility = 'hidden';
+    }
     //B2:
     //Hiển thị
     const result = await response.json();
     let productList = document.querySelector('.productList');
     productList.innerHTML = "";
 
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i <= result.length; i++) {
         productList.innerHTML += `
         <div class="col-md-4 pro">
             <div class="card">
@@ -71,14 +74,10 @@ async function getProductByCategorie() {
                 <div class="card-body">
                     <p class="card-title" onclick="getProduct(${result[i].id})">${result[i].product_name}</p>
                     <h5 class="card-text">${result[i].product_price.toLocaleString()} vnđ</h5>
+                    <a href="./addCart.php?id=${result[i].id}">Add to card</a>
                 </div>
             </div>
          </div>`;
-    }
-    //Nếu k check checkbox nào hoặc check all check box thì chạy giống index
-    if (categorieIdList.length == 0 || categorieIdList.length == checkboxCategory.length) {
-        viewMoreBtn.style.visibility = 'visible';
-        viewMoreBtn.id = "index";
     }
 }
 
