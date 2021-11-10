@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once './config/database.php';
 require_once './app/models/FactoryPattern.php';
 $factory = new FactoryPattern();
@@ -18,6 +19,9 @@ $getProduct = $productModel->getProducts();
 $categoryModel = $factory->make('category');
 $categoryList = $categoryModel->getCategories();
 
+if (isset($_POST['add'])){
+    print_r($_POST['$id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +120,7 @@ $categoryList = $categoryModel->getCategories();
     }
 
     .card .card-body {
-        height: 100px;
+        height: 160px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -144,87 +148,10 @@ $categoryList = $categoryModel->getCategories();
         box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 60%);
         margin-bottom: 30px;
     }
-    /*Dropdown gh*/
-.dropbtn {
-    background-color: #F08E21;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    margin-right:90px;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    min-width: 350px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 10px 0px;
-    text-decoration: none;
-    display: block;
-    font-size: 15px;
-  }
-  
-  .dropdown-content a:hover {
-    color: #f05137;
-
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  .dropdown-content h1{
-      color: red;
-      font-size: 15px;
-      padding-top: 11px;
-  }
-  .contentt h2{
-      font-size: 15px;
-      padding-top: 10px;
-      color: gray;
-  }
-
- .dropdown-content::after{
-    position: absolute;
-    top: -7px;
-    right: 40px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
-    content: '';
-    display: block;
-    z-index: 2;
-    transition: all 2000ms linear;
- }
-.btn-xem button{
-    border: 0 solid #EE4D2D;
-    background-color:#EE4D2D ;
-    color: white;
-    text-align: right;
-    padding: 5px 10px;
-    margin: 10px 0px;
-}
-.btn-xem{
-    text-align: right;
-    max-width: 101%;
-    background-color: rgb(251, 249, 249);
-}
+    .dropbtn{
+        background-color:#F08E21;
+        margin-right:80px;
+    }
 </style>
 
 <body>
@@ -259,7 +186,7 @@ $categoryList = $categoryModel->getCategories();
             <div class="dropdown" style="float:left;">
                         <button class="dropbtn">
                             <div class="shop">
-                                <a href="GioHang.html">
+                                <a href="cart.php">
                                     <svg width="42" height="34" viewBox="0 0 42 34" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" style="width:26px;height: 26px;">
                                         <path
@@ -268,35 +195,10 @@ $categoryList = $categoryModel->getCategories();
                                     </svg>
                                 </a>
                             </div>
-                        </button>
-                        <div class="dropdown-content" style="left: -270px;top: 75px;">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="contentt">
-                                        <h2>Sản phẩm mới thêm</h2>
-                                    </div>
-                                    <div class="col-md-2">
-                                         <a href="thanhtoan.html"><img src="./images/11red.jpg" alt="" width="50px"></a>
-                                        </div>
-                                    <div class="col-md-7">
-                                        <a href="thanhtoan.html">Iphone 11 64GB màu đỏ</a>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <h1>8,990,000</h1>
-                                    </div>
-                                   
-                                    <div class="btn-xem">
-                                       <a  href=""><button>Xem Giỏ Hàng</button></a> 
-                                    </div>
-                                </div>
-                            </div>   
-                        </div>
+                        </button>                     
                     </div>
         </div>
-
     </nav>
-
-
     <div class="container">
         <div class="con">
             <div class="row">
@@ -319,6 +221,9 @@ $categoryList = $categoryModel->getCategories();
                     </ul>
                 </div>
                 <div class="col-md-9">
+                <?php if (isset($_SESSION['success'])) :?>
+                        <p class="text-danger"> <?= $_SESSION['success'] ?></p>
+                        <?php endif ; unset($_SESSION['success']) ?>
                     <div class="row productList">
                         <?php
                         foreach ($firstPageProduct as $item) {
@@ -337,6 +242,7 @@ $categoryList = $categoryModel->getCategories();
                                     <div class="card-body">
                                         <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
                                         <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
                                     </div>
                                 </div>
                             </div>
