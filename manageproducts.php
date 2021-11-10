@@ -68,7 +68,7 @@ $no = 1;
                 <td><a href="form_edit_product.php?id=<?= $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
                 <td>
                     <form action="manageproducts.php" method="post" onsubmit="return confirm('Xoa khong?')">
-                        <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                        <input type="hidden" name="id" value="<?php echo rand(1111,9999).crc32($item['id']).rand(1111,9999) ?>">
                         <button type="submit" name="deleteProduct" class="btn btn-danger">DELETE</button>
                     </form>                
                 </td>
