@@ -3,7 +3,7 @@
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
-$db_name = "nhomf_quanlybandienthoai";
+$db_name = "nhomf-qlbandienthoai";
 
 try {    
     //tạo kết nối
