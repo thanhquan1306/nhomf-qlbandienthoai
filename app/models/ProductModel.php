@@ -1,4 +1,9 @@
 <?php
+
+use function PHPSTORM_META\type;
+
+require_once 'Db.php';
+
 class ProductModel extends Db
 {
     // Lấy tát cả sản phẩm

@@ -65,7 +65,7 @@ $no = 1;
 
                 <td><img src="./public/images/<?php echo $item['product_photo'] ?>" class="img-fluid" alt="..."></td>
                 <td><?php echo $item['product_name'] ?></td>
-                <td><a href="form_edit_product.php?id=<?= $item['product_id'] ?>" class="btn btn-primary">UPDATE</a></td>
+                <td><a href="form_edit_product.php?id=<?= $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
                 <td>
                     <form action="manageproducts.php" method="post" onsubmit="return confirm('Xoa khong?')">
                         <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
