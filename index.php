@@ -152,6 +152,20 @@ if (isset($_POST['add'])){
         background-color:#F08E21;
         margin-right:80px;
     }
+    .card-body a{
+        font-family: lato,sans-serif;
+        font-weight: bold;
+        font-size: 1em;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        color: #ffffff;
+        display: inline-block;
+        text-align: center;
+        padding: 3px;
+        position: relative;
+        border: 3px solid #ffffff;
+        border-radius: 20px;
+    }
 </style>
 
 <body>
