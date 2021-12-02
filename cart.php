@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// session_destroy();
 
 ?>
 <!DOCTYPE html>
@@ -54,6 +54,7 @@ session_start();
         <divclass="container">
             <?php if(isset($_SESSION['cart'])) : ?>
                 <div class="container">
+                </form>
 
 <h2>Danh sách các sản phẩm</h2>
 <table class="table table-bordered table-striped table-responsive-stack"  id="tableOne">
@@ -63,22 +64,43 @@ session_start();
          <th>Tên sản phẩm</th>
          <th>Số lượng</th>
          <th>Giá</th>
+         <th>Thành tiền</th>
+         <th>Xóa</th>
       </tr>
    </thead>
    <tbody>
-   <?php foreach($_SESSION['cart'] as $key => $value):?>
+       <?php $total_price = 0 ?> 
+   <?php foreach($_SESSION['cart'] as $key => $value):
+    $total_price += ($value['price'] * $value['qty']);
+    ?>
       <tr>
         <td> <img src="./public/images/<?= $value['photo'] ?>" alt="" height="60px"></td>
          <td><?= $value['name'] ?></td>
-         <td><?= $value['qty'] ?></td>
-         <td><?= $value['price'] ?> VNĐ</td>
-      </tr>
+         <td>
+             <form action="addCart.php">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="id" value="<?= $key ?>">
+                <input type="text" name="qty" value="<?= $value['qty'] ?>">
+                <button type="submit">Cập nhật</button>
+            </form>
+        </td>
+        <td><?= number_format($value['price']) ?> VNĐ</td>
+
+         <td><?= number_format($value['price'] * $value['qty']) ?> VNĐ</td>
+         <td ><a style="border: 1px solid orange;
+        background-color: orange;color: white;text-decoration-line: none;padding: 3px 8px;
+        border-radius: 10%;" 
+        href="addCart.php?id=<?= $key?>&action=delete" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm: <?= $value['name'] ?> ra khỏi giỏ hàng?')" >Xóa</a></td>
+        </tr>
       <?php endforeach ; ?>
+      <tr>
+          <th>Tổng tiền</th>
+          <th colspan="6" class="text-center "><?= number_format($total_price); ?> VND</th>
+      </tr>
    </tbody>
 </table>
         <?php else :?>
             <p>Khong ton tai gio hang</p>
             <?php endif; ?>
         </div>
-        </form>
     </body>

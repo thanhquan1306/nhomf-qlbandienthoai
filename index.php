@@ -256,7 +256,7 @@ if (isset($_POST['add'])){
                                     <div class="card-body">
                                         <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
                                         <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
-                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>&action=add">Add to card</a>
                                     </div>
                                 </div>
                             </div>
