@@ -1,5 +1,4 @@
 nav {
-
     background: #F08E21;
     height: 80px;
     font-size: 20px;
@@ -7,7 +6,7 @@ nav {
 
 nav a,
 .nav-link {
-    color: white;
+    color: white !important;
 }
 
 nav .navbar-brand {
@@ -24,8 +23,8 @@ nav .has {
 }
 
 .con {
-    position: absolute;
-    top: 150px;
+    position: relative;
+    top: 50px;
     left: calc(50% - 600px);
     width: 1200px;
 }
@@ -49,8 +48,7 @@ nav .has {
 .search {
     position: relative;
     top: 0;
-    left: -12.5%;
-    display: flex;
+    left: -90px;
 }
 
 .search .ip {
@@ -67,6 +65,9 @@ nav .has {
     border: 1px solid white;
     color: white;
     border-radius: .25rem;
+    position: absolute;
+    top: 0;
+    left: 405px;
 }
 
 .search input {
@@ -112,11 +113,91 @@ nav .has {
     box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 60%);
     margin-bottom: 30px;
 }
-.dropbtn{
-    background-color:#F08E21;
-    margin-right:80px;
+
+.dropbtn {
+    background-color: #F08E21;
+    margin-right: 80px;
 }
 
+.card-body a {
+    font-family: lato, sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: #ffffff;
+    display: inline-block;
+    text-align: center;
+    padding: 3px;
+    position: relative;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+}
 
+footer {
+    position: relative;
+    top: 100px;
+    left: 0px;
+    right: 113px;
+    color: #fff;
+    width: 100%;
+    background-color: #F08E21;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 50px;
+}
 
- 
+footer .row {
+    width: 100%;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.tile {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.foot {
+    text-decoration: none;
+    color: #fff;
+    text-align: left;
+}
+
+.fo {
+    text-align: center;
+    color: #fff;
+}
+
+.list-group-item:hover {
+    background-color: blanchedalmond;
+}
+
+.list-keywords {
+    position: absolute;
+    width: 400px;
+}
+
+.list-keySearch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+}
+
+.list-keySearch a {
+    position: relative;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #212529 !important;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    z-index: 5;
+}
+
+.imgSearch {
+    width: 40px;
+}
