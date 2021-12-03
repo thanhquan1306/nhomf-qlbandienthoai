@@ -1,27 +1,15 @@
 <?php
-session_start();
 require_once './config/database.php';
 require_once './app/models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
+$q = $_GET['q'];
 $productModel = $factory->make('product');
-
-$perPage = 3;
-$page = 1;
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-}
-//$page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-$firstPageProduct = $productModel->getProductsByPage($perPage, $page);
-$getProduct = $productModel->getProducts();
-
+$productList = $productModel->searchProducts($q);
+// var_dump($productList);
+// die();
 $categoryModel = $factory->make('category');
 $categoryList = $categoryModel->getCategories();
-
-if (isset($_POST['add'])) {
-    print_r($_POST['$id']);
-}
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +18,48 @@ if (isset($_POST['add'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Moblile</title>
+    <title>Document</title>
     <link rel="stylesheet" href="./public/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
+<style>
+    .row{
+        justify-content: center;
+    }
+    .search .ip {
+        width: 400px !important;
+    }
 
+    .pro {
+        margin-top: 50px;
+    }
+
+    .pro .card {
+        margin-left: calc(50% - 139px);
+        height: 410px;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+
+    .card .card-body {
+        height: 185px;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .notPro {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        position: relative;
+        top: 55px;
+    }
+</style>
+
+<!-- Thêm trang "Search" -->
 <body>
-    <!-- Phân loại sản phẩm theo hãng-header -->
     <nav class="navbar navbar-expand-sm ">
         <a class="navbar-brand" href="./index.php"><img src="./public/images/smartphone (1).png" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,8 +82,6 @@ if (isset($_POST['add'])) {
                 ?>
 
             </ul>
-
-            <!-- Search product -->
             <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
                 <input id="inputKeyword" list="keywords" class="form-control mr-sm-2 ip" autocomplete="off" type="text" placeholder="Search" name="q" onkeyup="getProductByKeyword()">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -83,88 +104,49 @@ if (isset($_POST['add'])) {
         </div>
     </nav>
     <div class="container">
-        <div class="con">
+        <?php
+        if (!empty($productList)) {
+        ?>
             <div class="row">
-                <div class="col-md-3">
-                    <ul>
-                        <h6 class="brands"><img class="menu" src="./public/images/menu (1).png"> Tìm Kiếm theo hãng</h6>
-                        <?php
-                        foreach ($categoryList as $i) {
-                        ?>
-                            <li>
-                                <label>
-                                    <?php echo $i['category_name']; ?>
-                                    <input type="checkbox" name="checkboxcate" class="checkboxCategory" id="<?= $i['id'] ?>" onchange="getProductByCategorie()">
-                                </label>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                        <p class="logout"><a href="./login/logout.php">Logout</a></p>
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <?php if (isset($_SESSION['success'])) : ?>
-                        <p class="text-danger"> <?= $_SESSION['success'] ?></p>
-                    <?php endif;
-                    unset($_SESSION['success']) ?>
-                    <div class="row productList">
-                        <?php
-                        foreach ($firstPageProduct as $item) {
-                        ?>
-                            <div class="col-md-4">
-                                <div class="pro">
-                                    <div class="card">
-                                        <?php
-                                        $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
-                                        ?>
-                                        <div class="khung">
-                                            <a href="product.php/<?php echo $productPath; ?>">
-                                                <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
-                                            </a>
-                                        </div>
+                <?php
+                foreach ($productList as $item) {
+                ?>
+                    <div class="col-md-4">
+                        <div class="pro">
+                            <div class="card">
+                                <?php
+                                $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
+                                ?>
+                                <div class="khung">
+                                    <a href="product.php/<?php echo $productPath; ?>">
+                                        <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
+                                    </a>
+                                </div>
 
-                                        <div class="card-body">
-                                            <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
-                                            <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
-                                            <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="view-more">
-                        <button value="<?= ((count($getProduct)) / $perPage) ?>" type="button" class="loadProduct" id="index" onclick="getMoreProduct()">Xem Thêm sản phẩm</button>
-                    </div>
-                    <!-- Chi tiết sản phẩm Trang chủ-->
-                    <!-- Modal -->
-                    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="productName"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" id="productDiscription">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="card-body">
+                                    <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
+                                    <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                    <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php
+                }
+                ?>
+
             </div>
-        </div>
+        <?php  } else { ?>
+            <p class="notPro">Không tìm thấy sản phẩm có tên "<?php echo $q ?>"</p>
+        <?php
+        }
+        ?>
 
     </div>
     <footer>
         <div class="row">
             <div class="col-md-4">
-                <p class="tile">Giới thiệu</p>
+                <p>Giới thiệu</p>
                 <p>
                     <a class="foot" href="#">ShopMobile</a>
                 </p>
@@ -176,7 +158,7 @@ if (isset($_POST['add'])) {
                 </p>
             </div>
             <div class="col-md-4">
-                <p class="tile">Mạng xã hội</p>
+                <p>Mạng xã hội</p>
                 <p>
                     <a class="foot" href="#"><img src="./public/images/Twitter.svg" class="icon" alt=""> Twitter</a>
                 </p>
@@ -189,7 +171,7 @@ if (isset($_POST['add'])) {
 
             </div>
             <div class="col-md-4">
-                <p class="tile">Download</p>
+                <p>Download</p>
                 <p>
                     <a href="# "><img class="apple" src="./public/images/AppStore.png" alt=""></a>
                 </p>
@@ -201,8 +183,6 @@ if (isset($_POST['add'])) {
         </div>
         <p class="fo">© 2021 ShopMobile</p>
     </footer>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script> -->
-    <script src="./public/js/ajax.js"></script>
 </body>
 
 </html>
