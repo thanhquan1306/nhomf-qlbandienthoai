@@ -1,5 +1,18 @@
 {
+<<<<<<< HEAD
+    "autoload": {
+      "classmap": [
+        "app/models/"
+      ]
+    },
+    "require-dev": {
+      "phpunit/phpunit": "9.5.10"
+    }
+  }
+  
+=======
     "require-dev": {
         "phpunit/phpunit": "9.5.10"
     }
 }
+>>>>>>> master-web2

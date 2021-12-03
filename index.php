@@ -113,22 +113,22 @@ if (isset($_POST['add'])) {
                         foreach ($firstPageProduct as $item) {
                         ?>
                             <div class="col-md-4">
-                                <div class="pro">
-                                    <div class="card">
-                                        <?php
-                                        $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
-                                        ?>
-                                        <div class="khung">
-                                            <a href="product.php/<?php echo $productPath; ?>">
-                                                <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
-                                            </a>
-                                        </div>
+                            <div class="pro">
+                                <div class="card">
+                                    <?php
+                                    $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
+                                    ?>
+                                    <div class="khung">
+                                        <a href="product.php/<?php echo $productPath; ?>">
+                                            <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
+                                        </a>
+                                    </div>
 
-                                        <div class="card-body">
-                                            <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
-                                            <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
-                                            <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
-                                        </div>
+                                    <div class="card-body">
+                                        <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
+                                        <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>&action=add">Add to card</a>
+     									</div>
                                     </div>
                                 </div>
                             </div>
