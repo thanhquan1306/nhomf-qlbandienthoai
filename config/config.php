@@ -1,2 +1,2 @@
 <?php
-define('BASE_URL', 'nhomf-qlbandienthoaiabc');
+define('BASE_URL', 'nhomf-qlbandienthoai');
