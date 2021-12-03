@@ -74,7 +74,7 @@ async function getProductByCategorie() {
                 <div class="card-body">
                     <p class="card-title" onclick="getProduct(${result[i].id})">${result[i].product_name}</p>
                     <h5 class="card-text">${result[i].product_price.toLocaleString()} vnđ</h5>
-                    <a href="./addCart.php?id=${result[i].id}">Add to card</a>
+                    <a href="./addCart.php?id=${result[i].id}&action=add">Add to card</a>
                 </div>
             </div>
          </div>`;
@@ -122,7 +122,7 @@ async function getMoreProduct() {
                     <div class="card-body">
                         <p class="card-title" onclick="getProduct(${item.id})">${item.product_name}</p>
                         <h5 class="card-text">${item.product_price.toLocaleString()} vnđ</h5>
-                        <a href="./addCart.php?id=${item.id}">Add to card</a>
+                        <a href="./addCart.php?id=${item.id}&action=add">Add to card</a>
                     </div>
                 </div>
             </div>`;

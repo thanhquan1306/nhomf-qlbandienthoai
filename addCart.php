@@ -14,10 +14,6 @@ if($quantity <= 0){
      $quantity = 1;
     header("Location:cart.php");
 }
-// var_dump ($_GET);
-// die();
-// var_dump($_GET['id']);
-// die();
 
 $product = $db->getProductById($id);
 if($action == 'add'){
@@ -53,5 +49,4 @@ if($action == 'delete'){
     unset($_SESSION['cart'][$id]);
     header("Location:cart.php");
 }
-
 ?>
