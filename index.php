@@ -2,6 +2,7 @@
 session_start();
 require_once './config/database.php';
 require_once './app/models/FactoryPattern.php';
+
 $factory = new FactoryPattern();
 
 $productModel = $factory->make('product');
@@ -57,7 +58,9 @@ if (isset($_POST['add'])) {
                 <?php
                 }
                 ?>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="accessory.php">Tất cả phụ kiện</a>
+                </li>
             </ul>
 
             <!-- Search product -->
@@ -101,6 +104,21 @@ if (isset($_POST['add'])) {
                         }
                         ?>
                         <p class="logout"><a href="./login/logout.php">Logout</a></p>
+                    </ul>
+                    <ul>
+                        <h6 class="brands"><img class="menu" src="./public/images/menu (1).png"> Sắp xếp theo giá</h6>
+                        <li>
+                                <label>
+                                    Giá tăng dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="ascPrice" data-orderBy="ASC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
+                        <li>
+                                <label>
+                                    Giá giảm dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="descPrice" data-orderBy="DESC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-9">

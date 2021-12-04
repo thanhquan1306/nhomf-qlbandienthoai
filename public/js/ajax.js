@@ -130,13 +130,38 @@ async function getMoreProduct() {
     viewMoreBtn.innerHTML = `Xem thêm sản phẩm`;
 }
 
-//Bắt sự kiện bàn phím
-async function getProductByKeyword() {
-    let input = document.querySelector('#inputKeyword').value;
-    console.log(input);
-    //B1:
-    const data = { key: input };
-    const url = './servers_ajax/productByKeyword.php';
+async function getProductOrderByPrice(e) {
+
+    let viewMoreBtn = document.querySelector('.loadProduct');
+    viewMoreBtn.id = "price";
+    viewMoreBtn.style.visibility = 'hidden';
+
+    const checkboxPrice = document.querySelectorAll('.checkboxPrice');
+    var orderBy = e.getAttribute("data-orderBy");
+
+    for (let i = 0; i < checkboxPrice.length; i++) {
+        if (checkboxPrice[i].checked && checkboxPrice[i].id != e.id) {
+            checkboxPrice[i].checked = false;
+        }
+    }
+    if (!e.checked) {
+        orderBy = null;
+    }
+
+    let categorieIdList = [];
+    let checkboxCategory = document.querySelectorAll('.checkboxCategory');
+    for (let i = 0; i < checkboxCategory.length; i++) {
+        if (checkboxCategory[i].checked) {
+            categorieIdList.push(checkboxCategory[i].id);
+        }
+    }
+
+    const data = { 
+        orderBy: orderBy,
+        // page: page,
+        id: categorieIdList
+     };
+    const url = './servers_ajax/productOrderByPrice.php';
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -145,17 +170,32 @@ async function getProductByKeyword() {
         },
         body: JSON.stringify(data)
     });
-    //B2:
+
     const result = await response.json();
-    // //Hiển thị
-    let listGroup = document.querySelector('.list-keySearch');
-    listGroup.innerHTML = "";
+    let productList = document.querySelector('.productList');
+    productList.innerHTML = "";
+
     for (let i = 0; i < result.length; i++) {
-        let str = result[i].product_name;
-        let regexKeyword = new RegExp(input, 'gi');
-        let content = str.replace(regexKeyword, `<b>${input}</b>`);
-        listGroup.innerHTML += `
-        <a href="product.php/${result[i].product_name}-${result[i].id}" type="button" class="list-group-item listSearch"><img class="imgSearch" src="./public/images/${result[i].product_photo}" alt=""> ${content}</a>
-        `;
+        const productName = result[i].product_name;
+        const id = result[i].id;
+        const productPhoto = result[i].product_photo;
+        const productPrice = result[i].product_price;
+
+        productList.innerHTML += `
+        <div class="col-md-4 pro">
+            <div class="card">
+                <div class="khung">
+                    <a href="product.php/${productName}-${id}">
+                        <img class="imge" src="./public/images/${productPhoto}" class="card-img-top" alt="...">
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <p class="card-title" onclick="getProduct(${id})">${productName}</p>
+                    <h5 class="card-text">${productPrice.toLocaleString()} vnđ</h5>
+                    <a href="./addCart.php?id=${id}">Add to card</a>
+                </div>
+            </div>
+         </div>`;
     }
 }
