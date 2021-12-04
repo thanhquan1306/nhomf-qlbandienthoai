@@ -59,6 +59,7 @@ if (isset($_POST['add'])) {
                 ?>
 
             </ul>
+            <!-- xử lý form Search product -->
             <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
                 <input id="inputKeyword" list="keywords" class="form-control mr-sm-2 ip" autocomplete="off" type="text" placeholder="Search" name="q" onkeyup="getProductByKeyword()">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
