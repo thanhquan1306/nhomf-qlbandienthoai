@@ -58,7 +58,7 @@ $categoryList = $categoryModel->getCategories();
     }
 </style>
 
-<!-- Thêm trang "Search" -->
+<!-- Trang kết quả tìm kiếm sản phẩm -->
 <body>
     <nav class="navbar navbar-expand-sm ">
         <a class="navbar-brand" href="./index.php"><img src="./public/images/smartphone (1).png" alt=""></a>

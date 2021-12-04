@@ -2,7 +2,6 @@
 session_start();
 require_once './config/database.php';
 require_once './app/models/FactoryPattern.php';
-
 $factory = new FactoryPattern();
 
 $productModel = $factory->make('product');
@@ -62,8 +61,7 @@ if (isset($_POST['add'])) {
                     <a class="nav-link" href="accessory.php">Tất cả phụ kiện</a>
                 </li>
             </ul>
-
-            <!-- Search product -->
+            <!-- xử lý form Search product -->
             <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
                 <input id="inputKeyword" list="keywords" class="form-control mr-sm-2 ip" autocomplete="off" type="text" placeholder="Search" name="q" onkeyup="getProductByKeyword()">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
