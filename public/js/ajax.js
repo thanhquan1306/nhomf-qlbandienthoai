@@ -131,6 +131,7 @@ async function getMoreProduct() {
 }
 
 //Bắt sự kiện bàn phím
+//Comment searchProduct
 async function getProductByKeyword() {
     let input = document.querySelector('#inputKeyword').value;
     console.log(input);
