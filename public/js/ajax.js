@@ -74,7 +74,7 @@ async function getProductByCategorie() {
                 <div class="card-body">
                     <p class="card-title" onclick="getProduct(${result[i].id})">${result[i].product_name}</p>
                     <h5 class="card-text">${result[i].product_price.toLocaleString()} vnđ</h5>
-                    <a href="./addCart.php?id=${result[i].id}&action=add">Add to card</a>
+                    <a href="./addCart.php?id=${result[i].id}">Add to card</a>
                 </div>
             </div>
          </div>`;
@@ -128,6 +128,37 @@ async function getMoreProduct() {
         });
     }
     viewMoreBtn.innerHTML = `Xem thêm sản phẩm`;
+}
+
+//Bắt sự kiện bàn phím
+//Comment searchProduct
+async function getProductByKeyword() {
+    let input = document.querySelector('#inputKeyword').value;
+    console.log(input);
+    //B1:
+    const data = { key: input };
+    const url = './servers_ajax/productByKeyword.php';
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+    });
+    //B2:
+    const result = await response.json();
+    // //Hiển thị
+    let listGroup = document.querySelector('.list-keySearch');
+    listGroup.innerHTML = "";
+    for (let i = 0; i < result.length; i++) {
+        let str = result[i].product_name;
+        let regexKeyword = new RegExp(input, 'gi');
+        let content = str.replace(regexKeyword, `<b>${input}</b>`);
+        listGroup.innerHTML += `
+        <a href="product.php/${result[i].product_name}-${result[i].id}" type="button" class="list-group-item listSearch"><img class="imgSearch" src="./public/images/${result[i].product_photo}" alt=""> ${content}</a>
+        `;
+    }
 }
 
 async function getProductOrderByPrice(e) {
