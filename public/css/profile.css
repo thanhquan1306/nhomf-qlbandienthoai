@@ -1,0 +1,34 @@
+.content-text{
+    margin-top: 5%;
+    margin-left: 20%;
+}
+
+hr {
+    width: 75%;
+}
+
+.content-profile{
+    margin-left: 15%;
+}
+
+.content-profile label{
+    text-align: right;
+    margin-top: 8px;
+}
+
+.content-profile a{
+    margin-top: 8px;
+    background: #f08e21;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding-top: 2px;
+}
+
+.form-group{
+    display: flex;
+}
+
+.form-group input{
+    width: 25%;
+}
