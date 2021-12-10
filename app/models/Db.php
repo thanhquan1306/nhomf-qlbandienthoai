@@ -1,4 +1,5 @@
 <?php
+require './config/database.php';
 class Db
 {
     public static $connection = NULL;
@@ -20,4 +21,23 @@ class Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
     }
+    /**
+     * Query in database
+     * @param $sql
+     */
+    protected function query($sql) {
+
+        $result = self::$connection->query($sql);
+        return $result;
+    }
+     /**
+     * Delete statement
+     * @param $sql
+     * @return mixed
+     */
+    protected function delete($sql) {
+        $result = $this->query($sql);
+        return $result;
+    }
+
 }
