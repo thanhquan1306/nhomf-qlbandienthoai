@@ -1,6 +1,4 @@
 <?php
-include './config/database.php';
-
 class Db
 {
     public static $connection = NULL;
