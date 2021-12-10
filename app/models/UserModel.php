@@ -4,22 +4,16 @@ require_once 'Db.php';
 class UserModel extends Db
 {
     // Lấy user theo id
-    public function getUsers()
-    {
-        $sql = parent::$connection->prepare("SELECT * FROM `users`");
-        return parent::select($sql);
-    }
-
-    // public function updateUser($cate, $id) {
-    //     $sql = parent::$connection->prepare("UPDATE `products_categories` SET `category_id`=? WHERE `product_id` = ?");
-    //     $sql->bind_param("ii", $cate,$id);
-    //  return $sql->execute();
+    // public function getUsers()
+    // {
+    //     $sql = parent::$connection->prepare("SELECT * FROM `users`");
+    //     return parent::select($sql);
     // }
 
     public function findUserById($id) {
         $sql = parent::$connection->prepare("SELECT * FROM users WHERE id=?");
         $sql->bind_param('i', $id);
-        return parent::select($sql)[0];
+        return parent::select($sql);
     }
 
     public function updateUsers($name, $email, $password, $id){
