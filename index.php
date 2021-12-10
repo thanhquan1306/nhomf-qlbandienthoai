@@ -33,17 +33,6 @@ if (isset($_POST['add'])) {
     <title>Shop Moblile</title>
     <link rel="stylesheet" href="./public/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <style>
-        .proUser {
-            position: relative;
-            display: inline-block;
-        }
-        .proUser i:hover{
-            cursor: pointer;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -68,10 +57,11 @@ if (isset($_POST['add'])) {
                 <?php
                 }
                 ?>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="accessory.php">Tất cả phụ kiện</a>
+                </li>
             </ul>
-
-            <!-- Search product -->
+            <!-- xử lý form Search product -->
             <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
                 <input id="inputKeyword" list="keywords" class="form-control mr-sm-2 ip" autocomplete="off" type="text" placeholder="Search" name="q" onkeyup="getProductByKeyword()">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -90,9 +80,6 @@ if (isset($_POST['add'])) {
                         </a>
                     </div>
                 </button>
-            </div>
-            <div class="proUser" style="margin-left: -4%; margin-right: 6%; font-size: 25px;">
-            <a href="./login/login.php"><i class="far fa-user-circle"></i></a>
             </div>
         </div>
     </nav>
@@ -116,6 +103,21 @@ if (isset($_POST['add'])) {
                         ?>
                         <p class="logout"><a href="./login/logout.php">Logout</a></p>
                     </ul>
+                    <ul>
+                        <h6 class="brands"><img class="menu" src="./public/images/menu (1).png"> Sắp xếp theo giá</h6>
+                        <li>
+                                <label>
+                                    Giá tăng dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="ascPrice" data-orderBy="ASC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
+                        <li>
+                                <label>
+                                    Giá giảm dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="descPrice" data-orderBy="DESC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-md-9">
                     <?php if (isset($_SESSION['success'])) : ?>
@@ -127,22 +129,22 @@ if (isset($_POST['add'])) {
                         foreach ($firstPageProduct as $item) {
                         ?>
                             <div class="col-md-4">
-                                <div class="pro">
-                                    <div class="card">
-                                        <?php
-                                        $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
-                                        ?>
-                                        <div class="khung">
-                                            <a href="product.php/<?php echo $productPath; ?>">
-                                                <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
-                                            </a>
-                                        </div>
+                            <div class="pro">
+                                <div class="card">
+                                    <?php
+                                    $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
+                                    ?>
+                                    <div class="khung">
+                                        <a href="product.php/<?php echo $productPath; ?>">
+                                            <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
+                                        </a>
+                                    </div>
 
-                                        <div class="card-body">
-                                            <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
-                                            <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
-                                            <a href="./addCart.php?id=<?php echo $item['id'] ?>&action=add">Add to card</a>
-                                        </div>
+                                    <div class="card-body">
+                                        <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
+                                        <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>&action=add">Add to card</a>
+     									</div>
                                     </div>
                                 </div>
                             </div>
