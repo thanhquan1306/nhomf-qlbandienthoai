@@ -28,7 +28,7 @@ if(isset($_POST['login'])){
     // nếu người dùng đã đăng ký
     if($user){
         // Xác minh mật khẩu
-        if(($password== $user["password"])){//password_verify($password== $user["password"])
+        if(password_verify($password, $user["password"])){//password_verify($password== $user["password"])
             // tạo một phiên
             session_start();
             $_SESSION["user"] = $user;
