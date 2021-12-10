@@ -33,7 +33,7 @@ if(isset($_POST['login'])){
             session_start();
             $_SESSION["user"] = $user;
             // đăng nhập thành công, chuyển hướng đến trang timeline
-            echo "<script> alert('Xin chào $username');window.location.href='../index.php'</script>";
+            echo "<script> alert('Xin chào $username');window.location.href='../profile.php?id=".$user['id']."'</script>";
             // header("Location: timeline.php");
         }
         else{
