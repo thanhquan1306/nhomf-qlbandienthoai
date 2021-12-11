@@ -7,12 +7,12 @@ spl_autoload_register(function ($class_name) {
 $notification = '';
 $productModel = new ProductModel();
 
-if (isset($_POST['deleteProduct'])) {
-    $id = $_POST['id'];
-    if($productModel->deleteProduct($id)) {
-        $notification = 'Deleted successfully';
-    }
-}
+// if (isset($_POST['deleteProduct'])) {
+//     $id = $_POST['id'];
+//     if($productModel->deleteProductById($id)) {
+//         $notification = 'Deleted successfully';
+//     }
+// }
 
 $productList = $productModel->getProducts();
 $no = 1;
@@ -66,11 +66,10 @@ $no = 1;
                 <td><img src="./public/images/<?php echo $item['product_photo'] ?>" class="img-fluid" alt="..."></td>
                 <td><?php echo $item['product_name'] ?></td>
                 <td><a href="form_edit_product.php?id=<?= $item['id'] ?>" class="btn btn-primary">UPDATE</a></td>
-                <td>
-                    <form action="manageproducts.php" method="post" onsubmit="return confirm('Xoa khong?')">
-                        <input type="hidden" name="id" value="<?php echo rand(1111,9999).crc32($item['id']).rand(1111,9999) ?>">
-                        <button type="submit" name="deleteProduct" class="btn btn-danger">DELETE</button>
-                    </form>                
+                <td>     
+                    <a href="deleteProduct.php?id=<?php echo rand(111, 999) . md5($item['id']) . rand(111, 999) ?>" class="btn btn-danger" 
+                    onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm')">
+                    DELETE</a>
                 </td>
             </tr>
             <?php
