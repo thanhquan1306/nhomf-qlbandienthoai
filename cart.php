@@ -91,8 +91,7 @@ session_start();
              <a style="border: 1px solid orange;
         background-color: orange;color: white;text-decoration-line: none;padding: 3px 8px;
         border-radius: 10%;" 
-        href="addCart.php?id=<?= $key?>&action=delete" onclick="return 
-        confirm('Bạn chắc chắn muốn xóa sản phẩm: <?= $value['name'] ?> ra khỏi giỏ hàng?')" >Xóa</a></td>
+        href="addCart.php?id=<?= $key?>&action=delete" onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm: <?= $value['name'] ?> ra khỏi giỏ hàng?')" >Xóa</a></td>
         </tr>
       <?php endforeach ; ?>
       <tr>

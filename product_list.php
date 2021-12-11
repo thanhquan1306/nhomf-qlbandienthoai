@@ -18,7 +18,7 @@ $notification = '';
 
 if (isset($_POST['deleteProduct'])) {
     $id = $_POST['id'];
-    if($productModel->deleteProduct($id)) {
+    if($productModel->deleteProductById($id)) {
         $notification = 'Deleted successfully';
     }
 }
