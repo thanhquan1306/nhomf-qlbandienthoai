@@ -84,11 +84,34 @@ class ProductModel extends Db
     }
 
     // Xóa sản phẩm Quang Vinh
-    public function deleteProduct($id)
-    {
-        $sql = parent::$connection->prepare("DELETE FROM `products` WHERE `products`.`id` = ?");
-        $sql->bind_param('i', $id);
-        return $sql->execute();
+    // public function deleteProduct($id)
+    // {
+    //     $sql = parent::$connection->prepare("DELETE FROM `products` WHERE `products`.`id` = ?");
+    //     $sql->bind_param('i', $id);
+    //     return $sql->execute();
+    // }
+    
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteProductById($id) {
+        $id = $this->hashToId($id);
+        $sql = 'DELETE FROM products WHERE id = '.$id;
+        return $this->delete($sql);
+    }
+    private function hashToId($hashId){
+        $hashId = substr($hashId, 3, -3);
+        $products = $this->getProducts();
+        foreach($products as $product){
+
+            if (md5($product['id']) == $hashId) {
+                return $product['id'];
+            }
+        }
+
+        return null;
     }
 
     //Lay sp pho bien

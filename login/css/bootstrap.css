@@ -2132,6 +2132,9 @@ fieldset[disabled] a.btn {
   background-color: #dc3545;
   border-color: #dc3545;
 }
+.btn-danger i {
+  font-style: normal;
+}
 
 .btn-danger:hover {
   color: #fff;

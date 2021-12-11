@@ -6,18 +6,17 @@ colors="true"
 cacheResult ="false"
 >
 <testsuites>
-<testsuite name="SqlWsContractImport">
-<file>./tests/ProductModelTest.php</file>
+<testsuite name="a">
+<file>./tests/Vinh_ProductModelTest.php</file>
+<!-- <file>./tests/ProductModelTest.php</file> -->
+<file>./tests/UserModelTest.php</file>
 </testsuite>
 </testsuites>
-<<<<<<< HEAD
-<filter>
-<whitelist processUncoveredFilesFromWhitelist="true">
-<directory suffix=".php">./models</directory>
-</whitelist>
-</filter>
-=======
->>>>>>> master-web2
+<filter>				
+<whitelist processUncoveredFilesFromWhitelist="true">				
+<directory suffix=".php">./app/models</directory>				
+</whitelist>				
+</filter>				
 <php>
 <server name="APP_ENV" value="testing"/>
 <server name="BCRYPT_ROUNDS" value="4"/>
@@ -27,8 +26,4 @@ cacheResult ="false"
 <server name="SESSION_DRIVER" value="array"/>
 <server name="TELESCOPE_ENABLED" value="false"/>
 </php>
-<<<<<<< HEAD
 </phpunit>
-=======
-</phpunit>
->>>>>>> master-web2

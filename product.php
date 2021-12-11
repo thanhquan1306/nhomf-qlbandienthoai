@@ -34,6 +34,8 @@ else{
 
 $item = $productModel->getProductById($id);
 $listComment = $commentModel->getCommentsByProductId($id);
+$starTotab = $commentModel->getAverageTotalStar($id);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +121,17 @@ $listComment = $commentModel->getCommentsByProductId($id);
             </div>
             <div class="col-md-8">
                 <h1><?php echo $item['product_name'] ?></h1>
-                <span><?php echo number_format($item['product_price'])?> vnđ</span>
+                 <!-- totab star rating -->
+                 <div class="star_rating">
+                    <?php for ($i = 0; $i < $starTotab; $i++) { ?>
+                        <i class="fas fa-star text-danger"></i>
+                    <?php }
+                    for ($i = 0; $i < (5 - $starTotab); $i++) { ?>
+                        <i class="fas fa-star text-secondary"></i>
+                    <?php } ?>
+                    <span><?= $starTotab ?>/5 Star</span>
+                </div>
+                <span style="font-weight: bold;"><?php echo number_format($item['product_price'])?> vnđ</span>
                 <p>
                     <?php echo $item['product_description'] ?>
                 </p>
@@ -164,18 +176,6 @@ $listComment = $commentModel->getCommentsByProductId($id);
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- JavaScript -->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-    <!-- Semantic UI theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
-    <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
     <script src="../public/js/ajax.js"></script>
 </body>
 </html>

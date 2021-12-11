@@ -4,8 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductModelTest extends TestCase
 {
-<<<<<<< HEAD
-
     /**
      * Test DeleteUserById Function in UserModel - 'Vinh' do this
      */
@@ -22,8 +20,6 @@ class ProductModelTest extends TestCase
         }
     }
 
-}
-=======
     /**
      * Test make user
      */
@@ -38,4 +34,3 @@ class ProductModelTest extends TestCase
         $this->assertEquals($expteced, $actual);
     }
 }
->>>>>>> master-web2
