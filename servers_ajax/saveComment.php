@@ -15,4 +15,5 @@ $commentModel = new CommentModel();
 
 $commentModel->saveComment($content, $star_number, $id);
 $item = $commentModel->getCommentsByProductId($id);
+array_push($item,["star_verage"=>$commentModel->getAverageTotalStar($id)]);
 echo json_encode($item);

@@ -19,4 +19,20 @@ class CommentModel extends Db
         $sql->bind_param('sii', $content, $star_number, $product_id);
         $sql->execute();
     }
+
+    //Tính trung bình tổng sao
+    public function getAverageTotalStar($product_id)
+    {
+        $array = $this->getCommentsByProductId($product_id);
+        $num = 0;
+        if ($array != null) {
+            foreach ($array as $item) {
+                $num += $item['star_number'];
+            }
+            $num = $num / count($array);
+        } else {
+            $num = 5;
+        }
+        return round($num);
+    }
 }
