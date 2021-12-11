@@ -5,10 +5,6 @@ use PHPUnit\Framework\TestCase;
 
 class VinhProductModelTest extends TestCase
 {
-    /**
-     * Test DeleteUserById Function in UserModel - 'Vinh' do this
-     */
-    // Test case testDeleteUserById
     public function testDeleteProductByIdOK()
     {
         $productModel = new ProductModel();
@@ -20,7 +16,6 @@ class VinhProductModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-     // Test case testDeleteProductByIdNg
      public function testDeleteProductByIdNg()
      {
          $productModel = new ProductModel();
@@ -32,7 +27,6 @@ class VinhProductModelTest extends TestCase
              $this->assertTrue(false);
          }
      }
-      // Test case testDeleteProductByIdNull
       public function testDeleteProductByIdNull()
       {
           $productModel = new ProductModel();
@@ -44,7 +38,6 @@ class VinhProductModelTest extends TestCase
               $this->assertTrue(false);
           }
       }
-       // Test case testDeleteProductByNotId
      public function testDeleteProductByNotId()
      {
          $productModel = new ProductModel();
@@ -56,7 +49,6 @@ class VinhProductModelTest extends TestCase
              $this->assertTrue(false);
          }
      }
-       // Test case testDeleteProductByIdTrue
        public function testDeleteProductByIdTrue()
        {
            $productModel = new ProductModel();
@@ -90,7 +82,7 @@ class VinhProductModelTest extends TestCase
                $this->assertTrue(false);
            }
        }
-       public function testDeleteUserExpectedandActual()
+       public function testDeleteproductExpectedandActual()
     {
         $productModel = new ProductModel();
         $id = -1;
@@ -119,5 +111,94 @@ class VinhProductModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+    }
+    //get Product
+    public function testGetCountProduct() {
+        $product             = new ProductModel();
+        $param["keyword"] = "a";
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetProductNg() {
+        $product             = new ProductModel();
+        $param["keyword"] = "dsdsdsd";
+        $actual           = count($product->getProducts($param));
+        if ($actual == 0) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testGetProductStr() {
+        $product             = new ProductModel();
+        $param["keyword"] = "aaaaaaaa";
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGeProductNumberFloat() {
+        $product             = new ProductModel();
+        $param["keyword"] = "18,11111";
+        $actual           = count($product->getproducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetProductNull() {
+        $product             = new ProductModel();
+        $param["keyword"] = null;
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetProductSpace() {
+        $product             = new ProductModel();
+        $param["keyword"] = "  ";
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetProductGood() {
+        $product             = new ProductModel();
+        $param["keyword"] = "Điện thoại Xiaomi Mi 11 5G";
+        $stringActual          = $product->getProducts($param);
+        $actual = $stringActual[0]["product_name"];
+        $expected         = "Điện thoại Xiaomi Mi 11 5G";
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetProductFalse() {
+        $product             = new ProductModel();
+        $param["keyword"] = false;
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetUserTrue() {
+        $product             = new ProductModel();
+        $param["keyword"] = true;
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetProductArray() {
+        $product             = new ProductModel();
+        $ar = array('product_name'=>'name',
+                    'product_description' =>'des');
+        $param["keyword"] = $ar;
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetProductObject() {
+        $product             = new ProductModel();
+        $param["keyword"] = new ProductModel();
+        $actual           = count($product->getProducts($param));
+        $expected         = 4;
+        $this->assertEquals($expected, $actual);
     }
 }
