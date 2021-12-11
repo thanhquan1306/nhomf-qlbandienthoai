@@ -48,11 +48,8 @@ nav .has {
 .search {
     position: relative;
     top: 0;
-    left: -90px;
-}
-
-.search .ip {
-    width: 400px;
+    left: -125px;
+    width: 300px;
 }
 
 .search button:hover {
@@ -67,7 +64,7 @@ nav .has {
     border-radius: .25rem;
     position: absolute;
     top: 0;
-    left: 405px;
+    left: 310px;
 }
 
 .search input {
