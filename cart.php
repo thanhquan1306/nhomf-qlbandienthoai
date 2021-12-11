@@ -80,7 +80,7 @@ session_start();
              <form action="addCart.php" onsubmit="return confirm('Bạn chắc chắn cập nhật?')">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" value="<?= $key ?>">
-                <input type="text" name="qty" value="<?= $value['qty'] ?>">
+                <input type="number" name="qty" value="<?= $value['qty'] ?>">
                 <button type="submit" >Cập nhật</button>
             </form>
         </td>
