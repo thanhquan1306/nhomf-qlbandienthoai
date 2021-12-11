@@ -1,0 +1,109 @@
+.content .col-md-6{
+    border-left: 1px solid #c8c9ca;
+    border-right: 1px solid #c8c9ca;
+}
+
+.content.row{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.content-text{
+    margin-top: 5%;
+    margin-left: 6%;
+}
+
+.content-profile label{
+    text-align: right;
+    margin-top: 8px;
+}
+
+.form-group{
+    display: flex;
+}
+
+.form-group input{
+    width: 60%;
+}
+
+.content-profile .btn.btn-primary.save{
+    margin-left: 68%;
+    margin-top: 1%;
+}
+
+.content-profile .btn.btn-primary.logout{
+    margin-top: 6px;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    /* transition: opacity 500ms; */
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 50%;
+    position: relative;
+  }
+  
+  .popup h3 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .close {
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    /* transition: all 200ms; */
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: #06D85F;
+  }
+  .popup .ct-txt {
+    max-height: 30%;
+    overflow: auto;
+  }
+  .passOld{
+      margin-left: 48px;
+      margin-right: 2%;
+  }
+  .passNew{
+    margin-left: 38px;
+    margin-right: 2%;
+  }
+  .passNew2{
+    margin-left: -1px;
+    margin-right: 2%;
+  }
+  .btn.btn.btn-primary.change{
+    width: 16%;
+    margin-left: 68%;
+  }
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
+  }

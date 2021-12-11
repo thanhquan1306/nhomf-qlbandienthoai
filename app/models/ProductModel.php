@@ -19,7 +19,7 @@ class ProductModel extends Db
     {
         $start = $perPage * ($page - 1);
         //2. Viết câu SQL
-        $sql = parent::$connection->prepare("SELECT * FROM products LIMIT ?, ?");
+        $sql = parent::$connection->prepare("SELECT * FROM products ORDER BY product_name ASC LIMIT ?, ?");
         $sql->bind_param('ii', $start, $perPage);
         return parent::select($sql);
     }
@@ -84,11 +84,34 @@ class ProductModel extends Db
     }
 
     // Xóa sản phẩm Quang Vinh
-    public function deleteProduct($id)
-    {
-        $sql = parent::$connection->prepare("DELETE FROM `products` WHERE `products`.`id` = ?");
-        $sql->bind_param('i', $id);
-        return $sql->execute();
+    // public function deleteProduct($id)
+    // {
+    //     $sql = parent::$connection->prepare("DELETE FROM `products` WHERE `products`.`id` = ?");
+    //     $sql->bind_param('i', $id);
+    //     return $sql->execute();
+    // }
+    
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteProductById($id) {
+        $id = $this->hashToId($id);
+        $sql = 'DELETE FROM products WHERE id = '.$id;
+        return $this->delete($sql);
+    }
+    private function hashToId($hashId){
+        $hashId = substr($hashId, 3, -3);
+        $products = $this->getProducts();
+        foreach($products as $product){
+
+            if (md5($product['id']) == $hashId) {
+                return $product['id'];
+            }
+        }
+
+        return null;
     }
 
     //Lay sp pho bien
@@ -104,6 +127,49 @@ class ProductModel extends Db
         $sql = parent::$connection->prepare("UPDATE `products` SET `product_view` = `product_view` + 1 WHERE `products`.`id` = ?;");
         $sql->bind_param('i', $id);
         return $sql->execute();
+    }
+
+    // Lấy all sp sắp xếp theo giá tăng dần/giảm dần
+    public function getProductsOrderByPrice($orderBy, $categoryId) {
+        $query = "SELECT * FROM products ";
+        $type = "";
+        $value = [];
+        if (!is_null($categoryId) && !empty($categoryId)) {
+            $query .= "INNER JOIN products_categories ON products.id = products_categories.product_id WHERE products_categories.category_id IN (";
+            $last = end($categoryId);
+            foreach($categoryId as $key => $id) {
+                if ($id == $last) {
+                    $query .= "?";
+                } else {
+                    $query .= "?,";
+                }
+            }
+            $query .= ") ";
+        }
+
+        if (!is_null($orderBy)) {
+            $query .= "ORDER BY product_price " . $orderBy . ", ";
+            $query .= "product_name DESC ";
+        } else {
+            $query .= "ORDER BY product_name ASC ";
+        }
+        
+        $sql = parent::$connection->prepare($query);
+
+        if (!is_null($categoryId) && !empty($categoryId)) {
+            foreach($categoryId as $id) {
+                $type .= 's';
+                $value[] = $id;
+            }
+            $sql->bind_param($type, ...$value);
+        }
+        return parent::select($sql);
+    }
+
+    public function getAccessories() {
+        //2. Viết câu SQL
+        $sql = parent::$connection->prepare("SELECT * FROM products WHERE product_type = '1'");
+        return parent::select($sql);
     }
 }
     

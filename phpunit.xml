@@ -6,10 +6,17 @@ colors="true"
 cacheResult ="false"
 >
 <testsuites>
-<testsuite name="SqlWsContractImport">
-<file>./tests/ProductModelTest.php</file>
+<testsuite name="a">
+<file>./tests/Vinh_ProductModelTest.php</file>
+<!-- <file>./tests/ProductModelTest.php</file> -->
+<file>./tests/UserModelTest.php</file>
 </testsuite>
 </testsuites>
+<filter>				
+<whitelist processUncoveredFilesFromWhitelist="true">				
+<directory suffix=".php">./app/models</directory>				
+</whitelist>				
+</filter>				
 <php>
 <server name="APP_ENV" value="testing"/>
 <server name="BCRYPT_ROUNDS" value="4"/>

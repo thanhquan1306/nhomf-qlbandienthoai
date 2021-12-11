@@ -57,7 +57,9 @@ if (isset($_POST['add'])) {
                 <?php
                 }
                 ?>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="accessory.php">Tất cả phụ kiện</a>
+                </li>
             </ul>
             <!-- xử lý form Search product -->
             <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
@@ -101,6 +103,21 @@ if (isset($_POST['add'])) {
                         ?>
                         <p class="logout"><a href="./login/logout.php">Logout</a></p>
                     </ul>
+                    <ul>
+                        <h6 class="brands"><img class="menu" src="./public/images/menu (1).png"> Sắp xếp theo giá</h6>
+                        <li>
+                                <label>
+                                    Giá tăng dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="ascPrice" data-orderBy="ASC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
+                        <li>
+                                <label>
+                                    Giá giảm dần
+                                    <input type="checkbox" name="checkboxcate" class="checkboxPrice" id="descPrice" data-orderBy="DESC" onchange="getProductOrderByPrice(this)">
+                                </label>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-md-9">
                     <?php if (isset($_SESSION['success'])) : ?>
@@ -112,22 +129,22 @@ if (isset($_POST['add'])) {
                         foreach ($firstPageProduct as $item) {
                         ?>
                             <div class="col-md-4">
-                                <div class="pro">
-                                    <div class="card">
-                                        <?php
-                                        $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
-                                        ?>
-                                        <div class="khung">
-                                            <a href="product.php/<?php echo $productPath; ?>">
-                                                <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
-                                            </a>
-                                        </div>
+                            <div class="pro">
+                                <div class="card">
+                                    <?php
+                                    $productPath = strtolower(str_replace(' ', '-', $item['product_name'])) . '-' . $item['id'];
+                                    ?>
+                                    <div class="khung">
+                                        <a href="product.php/<?php echo $productPath; ?>">
+                                            <img class="imge" src="./public/images/<?php echo $item['product_photo'] ?>" class="card-img-top" alt="...">
+                                        </a>
+                                    </div>
 
-                                        <div class="card-body">
-                                            <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
-                                            <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
-                                            <a href="./addCart.php?id=<?php echo $item['id'] ?>">Add to card</a>
-                                        </div>
+                                    <div class="card-body">
+                                        <p class="card-title" onclick="getProduct(<?php echo $item['id'] ?>)"><?php echo $item['product_name'] ?></p>
+                                        <h5 class="card-text"><?php echo number_format($item['product_price']) ?> vnđ</h5>
+                                        <a href="./addCart.php?id=<?php echo $item['id'] ?>&action=add">Add to card</a>
+     									</div>
                                     </div>
                                 </div>
                             </div>
