@@ -28,11 +28,6 @@ session_start();
                     <h1>Giỏ hàng</h1>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 search" action="search.php" method="get">
-                <input class="form-control mr-sm-2 ip" type="text" placeholder="Search" name="q">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-
             <div class="dropdown" style="float:left;">
                         <button class="dropbtn">
                             <div class="shop">
