@@ -93,7 +93,7 @@ $starTotab = $commentModel->getAverageTotalStar($id);
         .star:hover~.star,
         .star.selected~.star {
             transition: color 0.8s ease;
-            color: yellow;
+            color: #dc3545;
         }
 
     </style>
